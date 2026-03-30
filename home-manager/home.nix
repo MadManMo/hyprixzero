@@ -22,21 +22,15 @@
 
   # Extra packages
   home.packages = with pkgs; [
-    blender
-    obs-studio
-    obs-studio-plugins.obs-vaapi
-    obs-studio-plugins.obs-websocket
-    obs-studio-plugins.obs-vkcapture
-    obs-studio-plugins.obs-gstreamer
-    obs-studio-plugins.input-overlay
-    obs-studio-plugins.obs-aitum-multistream
-    obs-studio-plugins.obs-retro-effects
-    obs-studio-plugins.obs-advanced-masks
-    obs-studio-plugins.obs-stroke-glow-shadow
+    brave
     pcmanfm-qt
+    blender
     audacity
     vlc
     vesktop
+    lutris
+    mangohud
+    gamescope
   ];
 
   # OBS with NVIDIA CUDA + PipeWire
@@ -46,6 +40,13 @@
       wlrobs
       obs-pipewire-audio-capture
       obs-backgroundremoval
+      obs-vkcapture
+      obs-advanced-masks
+      obs-stroke-glow-shadow
+      input-overlay
+      obs-aitum-multistream
+      obs-gstreamer
+      obs-retro-effects 
     ];
   };
 
