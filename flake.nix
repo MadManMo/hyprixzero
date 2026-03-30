@@ -1,5 +1,5 @@
 {
-  description = "HyprixZero – Hyprland + Caelestia + Gaming/Streaming/3D NixOS config";
+  description = "HyprixZero";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
