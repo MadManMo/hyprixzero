@@ -97,8 +97,8 @@
   ];
 
   home.sessionVariables = {
-    QT_QPA_PLATFORMTHEME = "qt6ct";   # or "kvantum" if you prefer Kvantum
-    # QT_STYLE_OVERRIDE = "kvantum";  # uncomment if using Kvantum
+    QT_QPA_PLATFORMTHEME = "qt6ct";
+    # QT_STYLE_OVERRIDE = "kvantum";
   };
 
 }
