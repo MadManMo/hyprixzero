@@ -1,66 +1,53 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
-  # You can import other home-manager modules here
+{ config, pkgs, caelestianix, ... }: {
   imports = [
-    # If you want to use modules your own flake exports (from modules/home-manager):
-    # inputs.self.homeManagerModules.example
-
-    # Or modules exported from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModules.default
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
+    caelestianix.homeManagerModules.default
   ];
 
-  nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      inputs.self.overlays.additions
-      inputs.self.overlays.modifications
-      inputs.self.overlays.unstable-packages
+  home.username = "dairozero";
+  home.homeDirectory = "/home/dairozero";
+  home.stateVersion = "25.05";
 
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
-    ];
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
+  # Enable Hyprland + Quickshell + Foot theming
+  programs.caelestia-dots = {
+    enable = true;
+    hypr.enable = true;
+    term.enable = true;
+    foot.enable = true;
+    hypr.settings = {
+      animations = {
+        enabled = false;
+      };
     };
   };
 
-  # TODO: Set your username
-  home = {
-    username = "your-username";
-    homeDirectory = "/home/your-username";
+  # Extra packages
+  home.packages = with pkgs; [
+    blender
+    obs-studio
+    obs-studio-plugins.obs-vaapi
+    obs-studio-plugins.obs-websocket
+    obs-studio-plugins.obs-vkcapture
+    obs-studio-plugins.obs-gstreamer
+    obs-studio-plugins.input-overlay
+    obs-studio-plugins.obs-aitum-multistream
+    obs-studio-plugins.obs-retro-effects
+    obs-studio-plugins.obs-advanced-masks
+    obs-studio-plugins.obs-stroke-glow-shadow
+    pcmanfm-qt
+    audacity
+    vlc
+    vesktop
+  ];
+
+  # OBS with NVIDIA CUDA + PipeWire
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-pipewire-audio-capture
+      obs-backgroundremoval
+    ];
   };
 
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
-
-  # Enable home-manager and git
-  programs.home-manager.enable = true;
-  programs.git.enable = true;
-
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
-
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.05";
+  # programs.zsh.enable = true;
 }
