@@ -17,7 +17,7 @@
     let
       system = "x86_64-linux";
       hostname = "hyprixzero";   # change if you want
-      username = "dairozer";
+      username = "dairozero";
     in {
       nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
         inherit system;
