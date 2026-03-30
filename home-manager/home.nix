@@ -1,12 +1,16 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, ... }: {
   imports = [];
 
   home.username = "dairozero";
   home.homeDirectory = "/home/dairozero";
   home.stateVersion = "25.11";
 
-  # Important when using UWSM + programs.hyprland.withUWSM
   wayland.windowManager.hyprland.systemd.enable = false;
+
+  programs.quickshell = {
+    enable = true;
+    package = inputs.quickshell.packages.${pkgs.system}.default;
+  };
 
   # === Gaming ===
   programs.steam = {
@@ -52,7 +56,6 @@
     libsForQt6.qt6-wayland
     libsForQt5.qt5-wayland
     kvantum
-    quickshell
 
     # === Wayland / Hyprland Utilities ===
     awww 
