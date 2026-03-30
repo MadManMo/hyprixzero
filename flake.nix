@@ -15,7 +15,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, quickshell, ... }:
     let
       system = "x86_64-linux";
       hostname = "hyprixzero";
@@ -24,14 +24,23 @@
       nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
         inherit system;
 
+        specialArgs = {
+          inherit inputs;        # Makes all inputs (including quickshell) available
+        };
+
         modules = [
           ./nixos/configuration.nix
+
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.${username} = import ./home-manager/home.nix;
-            #home-manager.extraSpecialArgs = { };
+
+            # Pass inputs to home-manager as well
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+            };
           }
         ];
       };
