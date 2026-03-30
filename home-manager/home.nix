@@ -7,12 +7,12 @@
   home.homeDirectory = "/home/dairozero";
   home.stateVersion = "25.11";
 
-  # Enable Hyprland + Quickshell + Foot theming
   programs.caelestia-dots = {
     enable = true;
     hypr.enable = true;
     term.enable = true;
     foot.enable = true;
+
     hypr.settings = {
       animations = {
         enabled = false;
@@ -20,7 +20,6 @@
     };
   };
 
-  # Extra packages
   home.packages = with pkgs; [
     brave
     pcmanfm-qt
@@ -33,7 +32,6 @@
     gamescope
   ];
 
-  # OBS with NVIDIA CUDA + PipeWire
   programs.obs-studio = {
     enable = true;
     plugins = with pkgs.obs-studio-plugins; [
@@ -46,7 +44,7 @@
       input-overlay
       obs-aitum-multistream
       obs-gstreamer
-      obs-retro-effects 
+      obs-retro-effects
     ];
   };
 
