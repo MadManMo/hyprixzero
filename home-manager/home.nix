@@ -12,6 +12,25 @@
     package = inputs.quickshell.packages.${pkgs.system}.default;
   };
 
+  programs.fish = {
+    enable = true;
+
+    # Optional
+    interactiveShellInit = ''
+      set fish_greeting          # Disable the default greeting
+      # Add any other fish init code here
+    '';
+
+    # Example: shell aliases
+    shellAliases = {
+      ls = "eza -la --icons";    # eza
+      vim = "nvim";
+      update = "sudo nixos-rebuild switch --flake .#hyprixzero";
+    };
+
+  # plugins = [ ... ];
+  };
+
   # === Gaming ===
   programs.steam = {
     enable = true;
