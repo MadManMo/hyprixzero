@@ -4,11 +4,11 @@
     ./modules/default.nix  # your custom modules
   ];
 
-  networking.hostName = "hyprixzero";
+  networking.hostName = "nixos";
   time.timeZone = "Etc/UTC";  # change to your TZ
   i18n.defaultLocale = "en_US.UTF-8";
 
-  users.users.dairozer = {
+  users.users.dairozero = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
     shell = pkgs.fish;  # Caelestia uses fish
