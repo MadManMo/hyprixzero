@@ -31,6 +31,14 @@
   programs.hyprland.enable = true;  # base enable (Caelestia will configure it)
   services.pipewire = { enable = true; alsa.enable = true; pulse.enable = true; };
 
+  fonts.packages = with pkgs; [
+  pkgs.nerd-fonts.fira-code
+  pkgs.nerd-fonts.jetbrains-mono
+  pkgs.nerd-fonts.symbols-only
+  pkgs.nerd-fonts.iosevka-term
+  pkgs.nerd-fonts.iosevka-term-slab
+  ];
+
   services.flatpak.enable = true;
 
   system.stateVersion = "25.11";
