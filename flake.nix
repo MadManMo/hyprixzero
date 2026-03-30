@@ -18,7 +18,7 @@
   outputs = { self, nixpkgs, home-manager, caelestianix, ... }:
     let
       system = "x86_64-linux";
-      hostname = "nixos";
+      hostname = "hyprixzero";
       username = "dairozero";
     in {
       nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
