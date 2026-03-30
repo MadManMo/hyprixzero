@@ -1,6 +1,7 @@
 { config, pkgs, lib, inputs, ... }: {
   imports = [
     ./hardware-configuration.nix
+    ./pkgs/default.nix
   ];
 
   networking.hostName = "hyprixzero";
