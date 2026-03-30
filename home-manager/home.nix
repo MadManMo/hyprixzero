@@ -7,18 +7,7 @@
   home.homeDirectory = "/home/dairozero";
   home.stateVersion = "25.11";
 
-  programs.caelestia-dots = {
-    enable = true;
-    hypr.enable = true;
-    term.enable = true;
-    foot.enable = true;
-
-    hypr.settings = {
-      animations = {
-        enabled = false;
-      };
-    };
-  };
+  programs.caelestia-dots = enable = true;
 
   home.packages = with pkgs; [
     brave
