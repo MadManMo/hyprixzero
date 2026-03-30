@@ -23,6 +23,11 @@
     in {
       nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
         inherit system;
+
+        specialArgs = {
+          inherit caelestianix;
+        };
+
         modules = [
           ./nixos/configuration.nix
           home-manager.nixosModules.home-manager
