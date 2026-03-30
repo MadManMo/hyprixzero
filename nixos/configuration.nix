@@ -18,6 +18,8 @@
     kernelPackages = pkgs.linuxPackages_zen;
     kernelModules = [ "v4l2loopback" ];
     extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+    extraModprobeConfig = '' options v4l2loopback exclusive_caps=1 card_label="Virtual Camera" '';
+    kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
     kernel.sysctl = {
       "vm.max_map_count" = 2147483642;
     };
@@ -48,22 +50,51 @@
     };
   };
 
+  networking.networkmanager.enable = true;
+
+  services.xserver.enable = false;
+
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
+    powerManagement.enable = true;
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+    ];
+    config.common.default = "*";
+  };
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;  # optional
+  };
+
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
     QT_QPA_PLATFORM = "wayland";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
   };
 
-  programs.hyprland.enable = true;
-  services.pipewire = { enable = true; alsa.enable = true; pulse.enable = true; };
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+    xwayland.enable = true;
+  };
 
   fonts.packages = with pkgs; [
     pkgs.nerd-fonts.fira-code
@@ -72,6 +103,12 @@
     pkgs.nerd-fonts.iosevka-term
     pkgs.nerd-fonts.iosevka-term-slab
   ];
+
+  fonts.fontconfig = {
+    enable = true;
+    antialias = true;
+    hinting.enable = true;
+  };
 
   services.flatpak.enable = true;
 
