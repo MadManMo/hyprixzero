@@ -7,7 +7,20 @@
   home.homeDirectory = "/home/dairozero";
   home.stateVersion = "25.11";
 
-  programs.caelestia-dots.enable = true;
+  programs.caelestia = {
+    enable = true;
+    systemd = {
+      enable = false;
+    };
+    settings = {
+      bar.status = {
+        showBattery = false;
+      };
+    };
+    cli = {
+      enable = true;
+    };
+  };
 
   home.packages = with pkgs; [
     brave
