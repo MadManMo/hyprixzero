@@ -110,6 +110,9 @@
     hinting.enable = true;
   };
 
+  programs.fish.enable = true;
+  users.users.dairozero.shell = pkgs.fish;
+
   services.flatpak.enable = true;
 
   system.stateVersion = "25.11";
