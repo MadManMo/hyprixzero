@@ -5,7 +5,7 @@
 
   home.username = "dairozero";
   home.homeDirectory = "/home/dairozero";
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
   # Enable Hyprland + Quickshell + Foot theming
   programs.caelestia-dots = {
