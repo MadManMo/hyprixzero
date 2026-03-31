@@ -87,7 +87,6 @@
     audacity
     blender
     ffmpeg
-    reaper
     vlc
 
     # === Browsing / Chat ===
