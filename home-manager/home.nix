@@ -94,11 +94,6 @@
     brave
     vesktop
 
-    # === OCR ===
-    tesseract
-    tesseract-data-eng
-    tesseract-data-spa
-
     # === Gaming Tools ===
     mangohud
     gamescope
