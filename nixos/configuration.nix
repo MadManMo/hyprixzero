@@ -68,6 +68,7 @@
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
+      kdePackages.xdg-desktop-portal-kde 
       xdg-desktop-portal-hyprland
     ];
     config.common.default = "*";
@@ -107,6 +108,34 @@
       xwayland.enable = true;
     };
   };
+  environment.systemPackages = with pkgs; [
+    # Dolphin core
+    kdePackages.dolphin
+
+    # Core KDE runtime
+    kdePackages.kio
+    kdePackages.kio-fuse
+    kdePackages.kio-extras
+    kdePackages.kdegraphics-thumbnailers
+    kdePackages.qtsvg
+    kdePackages.breeze-icons
+    kdePackages.kservice
+
+    # File associations on Hyprland
+    kdePackages.plasma-workspace
+    kdePackages.dolphin-plugins   # optional
+
+    # General system utils
+    shared-mime-info
+
+    # Better search in Dolphin
+     kdePackages.baloo
+     kdePackages.baloo-widgets
+  ];
+
+  environment.etc."xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
+  xdg.mime.enable = true;
+  xdg.menus.enable = true;
 
   fonts.packages = with pkgs; [
     pkgs.nerd-fonts.fira-code
