@@ -81,7 +81,6 @@
     wl-clipboard
 
     # === Monitoring ===
-    nvtop
     pwvucontrol
 
     # === Media & Creative ===
