@@ -30,15 +30,6 @@
     package = inputs.quickshell.packages.${pkgs.system}.default;
   };
 
-  # === Gaming ===
-  programs.steam = {
-    enable = true;
-    gamescopeSession.enable = true;
-    remotePlay.openFirewall = true;
-  };
-
-  programs.gamemode.enable = true;
-
   # === OBS Studio ===
   programs.obs-studio = {
     enable = true;
