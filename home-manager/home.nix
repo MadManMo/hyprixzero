@@ -62,7 +62,7 @@
     # === Qt6 / Theming & File Management ===
     pcmanfm-qt
     qt6Packages.qt6ct
-    qtwayland
+    libsForQt5.qt5.qtwayland
     kvantum
     hyprland-qt-support
 
