@@ -5,30 +5,29 @@
   home.homeDirectory = "/home/dairozero";
   home.stateVersion = "25.11";
 
+  # Important for UWSM
   wayland.windowManager.hyprland.systemd.enable = false;
 
-  programs.quickshell = {
-    enable = true;
-    package = inputs.quickshell.packages.${pkgs.system}.default;
-  };
-
+  # === Shell ===
   programs.fish = {
     enable = true;
 
-    # Optional
     interactiveShellInit = ''
-      set fish_greeting          # Disable the default greeting
-      # Add any other fish init code here
+      set fish_greeting          # Disable default greeting
     '';
 
-    # Example: shell aliases
     shellAliases = {
-      ls = "eza -la --icons";    # eza
+      ls = "eza -la --icons";
       vim = "nvim";
       update = "sudo nixos-rebuild switch --flake .#hyprixzero";
+      upgrade = "sudo nixos-rebuild switch --flake .#hyprixzero && home-manager switch --flake .#dairozero";
     };
+  };
 
-  # plugins = [ ... ];
+  # === Quickshell ===
+  programs.quickshell = {
+    enable = true;
+    package = inputs.quickshell.packages.${pkgs.system}.default;
   };
 
   # === Gaming ===
@@ -67,6 +66,7 @@
     yazi
     unzip
     yt-dlp
+    eza
 
     # === Qt6 / Theming & File Management ===
     pcmanfm-qt
@@ -77,7 +77,7 @@
     kvantum
 
     # === Wayland / Hyprland Utilities ===
-    awww 
+    awww
     brightnessctl
     cliphist
     ddcutil
@@ -116,8 +116,11 @@
     lutris
     protonup-qt
 
+    # Optional
+    # imv
   ];
 
+  # Qt theming
   home.sessionVariables = {
     QT_QPA_PLATFORMTHEME = "qt6ct";
     # QT_STYLE_OVERRIDE = "kvantum";
