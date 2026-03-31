@@ -20,6 +20,7 @@
       system = "x86_64-linux";
       hostname = "hyprixzero";
       username = "dairozero";
+      # Import nixpkgs with unfree packages allowed
       pkgs = import nixpkgs {
         inherit system;
         config = {
@@ -27,7 +28,7 @@
         };
       };
     in {
-      nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {  # Use nixpkgs.lib directly here
         inherit system pkgs;
 
         specialArgs = {
