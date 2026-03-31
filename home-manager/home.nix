@@ -60,10 +60,11 @@
     eza
 
     # === Qt6 / Theming & File Management ===
-    pcmanfm-qt
+    kdePackages.qt6ct
+    kdePackages.plasma-integration   
+    kdePackages.qtwayland 
     qt6Packages.qt6ct
     libsForQt5.qt5.qtwayland
-    #kvantum
     hyprland-qt-support
 
     # === Wayland / Hyprland Utilities ===
@@ -107,7 +108,7 @@
   # Qt theming
   home.sessionVariables = {
     QT_QPA_PLATFORMTHEME = "qt6ct";
-    # QT_STYLE_OVERRIDE = "kvantum";
+    QT_QPA_PLATFORM = "wayland";
   };
 
 }
