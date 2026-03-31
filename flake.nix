@@ -15,7 +15,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, quickshell, ... }:
+  outputs = { self, nixpkgs, home-manager, quickshell, ... } @ inputs:
     let
       system = "x86_64-linux";
       hostname = "hyprixzero";
@@ -25,7 +25,7 @@
         inherit system;
 
         specialArgs = {
-          inherit inputs;        # Makes all inputs (including quickshell) available
+          inherit inputs;
         };
 
         modules = [
