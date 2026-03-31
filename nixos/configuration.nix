@@ -91,12 +91,19 @@
   };
 
   programs = {
+    fish.enable = true;
+    gamemode.enable = true;
+    steam = {
+      enable = true;
+      gamescopeSession.enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+    };
     hyprland = {
       enable = true;
       withUWSM = true;
       xwayland.enable = true;
     };
-    fish.enable = true;
   };
 
   fonts.packages = with pkgs; [
