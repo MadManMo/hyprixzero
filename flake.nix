@@ -27,7 +27,7 @@
         };
       };
     in {
-      nixosConfigurations.${hostname} = pkgs.lib.nixosSystem {
+      nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
 
         specialArgs = {
