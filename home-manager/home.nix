@@ -63,7 +63,7 @@
     pcmanfm-qt
     qt6Packages.qt6ct
     libsForQt5.qt5.qtwayland
-    kvantum
+    #kvantum
     hyprland-qt-support
 
     # === Wayland / Hyprland Utilities ===
