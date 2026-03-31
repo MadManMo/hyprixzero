@@ -62,12 +62,12 @@
     # === Qt6 / Theming & File Management ===
     pcmanfm-qt
     qt6Packages.qt6ct
-    libsForQt6.qt6-wayland
     libsForQt5.qt5-wayland
     kvantum
+    hyprland-qt-support
 
     # === Wayland / Hyprland Utilities ===
-    awww
+    swww
     brightnessctl
     cliphist
     ddcutil
