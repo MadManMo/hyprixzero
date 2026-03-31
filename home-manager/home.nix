@@ -61,7 +61,7 @@
 
     # === Qt6 / Theming & File Management ===
     pcmanfm-qt
-    qt6ct
+    qt6Packages.qt6ct
     qt5ct
     libsForQt6.qt6-wayland
     libsForQt5.qt5-wayland
