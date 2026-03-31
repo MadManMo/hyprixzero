@@ -85,6 +85,7 @@
 
     # === Media & Creative ===
     audacity
+    reaper
     blender
     ffmpeg
     vlc
