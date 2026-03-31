@@ -18,7 +18,8 @@
   outputs = { self, nixpkgs, home-manager, quickshell, ... } @ inputs:
     let
       system = "x86_64-linux";
-      # Import nixpkgs with unfree packages allowed
+      hostname = "hyprixzero";
+      username = "dairozero";
       pkgs = import nixpkgs {
         inherit system;
         config = {
