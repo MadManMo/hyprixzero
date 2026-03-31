@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
+    
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,11 +18,16 @@
   outputs = { self, nixpkgs, home-manager, quickshell, ... } @ inputs:
     let
       system = "x86_64-linux";
-      hostname = "hyprixzero";
-      username = "dairozero";
-    in {
-      nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
+      # Import nixpkgs with unfree packages allowed
+      pkgs = import nixpkgs {
         inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+    in {
+      nixosConfigurations.${hostname} = pkgs.lib.nixosSystem {
+        inherit system pkgs;
 
         specialArgs = {
           inherit inputs;
