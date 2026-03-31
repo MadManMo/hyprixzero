@@ -90,10 +90,13 @@
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
   };
 
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-    xwayland.enable = true;
+  programs = {
+    hyprland = {
+      enable = true;
+      withUWSM = true;
+      xwayland.enable = true;
+    };
+    fish.enable = true;
   };
 
   fonts.packages = with pkgs; [
@@ -109,9 +112,6 @@
     antialias = true;
     hinting.enable = true;
   };
-
-  programs.fish.enable = true;
-  users.users.dairozero.shell = pkgs.fish;
 
   services.flatpak.enable = true;
 
