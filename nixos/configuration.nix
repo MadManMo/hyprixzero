@@ -1,10 +1,11 @@
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /home/dairozero/HyprixZero/nixos/configuration.nix                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 { config, pkgs, lib, inputs, ... }: {
   imports = [
     ./hardware-configuration.nix
     #./pkgs/default.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
+  #nixpkgs.config.allowUnfree = true;
 
   networking.hostName = "hyprixzero";
   time.timeZone = "America/New_York";
@@ -56,9 +57,15 @@
 
   services.xserver.enable = false;
 
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
+    powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
@@ -82,6 +89,9 @@
     jack.enable = true;  # optional
   };
 
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
@@ -91,6 +101,7 @@
     QT_QPA_PLATFORM = "wayland";
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    __GL_GSYNC_ALLOWED = "1";
   };
 
   programs = {
@@ -109,6 +120,10 @@
     };
   };
   environment.systemPackages = with pkgs; [
+    git
+    vim
+    wget
+
     # Dolphin core
     kdePackages.dolphin
 
@@ -137,18 +152,28 @@
   xdg.mime.enable = true;
   xdg.menus.enable = true;
 
-  fonts.packages = with pkgs; [
-    pkgs.nerd-fonts.fira-code
-    pkgs.nerd-fonts.jetbrains-mono
-    pkgs.nerd-fonts.symbols-only
-    pkgs.nerd-fonts.iosevka-term
-    pkgs.nerd-fonts.iosevka-term-slab
-  ];
+  fonts = {
+    enableDefaultPackages = true;
 
-  fonts.fontconfig = {
-    enable = true;
-    antialias = true;
-    hinting.enable = true;
+    packages = with pkgs; [
+      nerd-fonts.fira-code
+      nerd-fonts.jetbrains-mono      # Your main choice
+      nerd-fonts.symbols-only
+      nerd-fonts.iosevka-term
+      nerd-fonts.iosevka-term-slab
+    ];
+
+    fontconfig = {
+      enable = true;
+      antialias = true;
+      hinting.enable = true;
+      # hinting.style = "slight";   # or "medium" / "full"
+      # subpixel.rgba = "rgb";
+
+      defaultFonts = {
+        monospace = [ "JetBrainsMono Nerd Font" ];   # This is the exact family name
+      };
+    };
   };
 
   services.flatpak.enable = true;
