@@ -1,3 +1,4 @@
+                                                                                                                                                                               /home/dairozero/HyprixZero/flake.nix                                                                                                                                                                                              
 {
   description = "HyprixZero";
 
