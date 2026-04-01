@@ -1,3 +1,4 @@
+                                                                                                                                                                                                                                                                                     /home/dairozero/HyprixZero/home-manager/home.nix                                                                                                                                                                                                                                                                                                  
 { config, pkgs, inputs, ... }: {
   imports = [];
 
@@ -14,13 +15,34 @@
 
     interactiveShellInit = ''
       set fish_greeting          # Disable default greeting
+      # Auto-start Hyprland via UWSM only on tty1
+      if status is-interactive
+        if test -z "$WAYLAND_DISPLAY" -a "$XDG_VTNR" = 1
+          if command -q uwsm && uwsm check may-start
+            exec uwsm start -eD Hyprland hyprland.desktop
+          end
+        end
+      end
     '';
 
     shellAliases = {
       ls = "eza -la --icons";
       vim = "nvim";
       update = "sudo nixos-rebuild switch --flake .#hyprixzero";
-      upgrade = "sudo nixos-rebuild switch --flake .#hyprixzero && home-manager switch --flake .#dairozero";
+      upgrade = "sudo nixos-rebuild switch --flake .#hyprixzero";
+    };
+  };
+
+  # === Cursor ===
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";     # Black theme (rounded)
+    #name = "Bibata-Original-Classic"; # Black theme (sharp)
+    size = 24;
+    hyprcursor = {
+      enable = true;
     };
   };
 
@@ -49,6 +71,7 @@
 
   # === Home Packages ===
   home.packages = with pkgs; [
+
     # === Terminal / CLI ===
     fastfetch
     foot
@@ -69,6 +92,7 @@
 
     # === Wayland / Hyprland Utilities ===
     swww
+    wallust
     brightnessctl
     cliphist
     ddcutil
@@ -80,6 +104,10 @@
     slurp
     swappy
     wl-clipboard
+    pipewire
+    wireplumber
+    networkmanager
+    socat
 
     # === Monitoring ===
     pwvucontrol
@@ -103,12 +131,14 @@
 
     # Optional
     # imv
+    rmpc
   ];
 
   # Qt theming
   home.sessionVariables = {
     QT_QPA_PLATFORMTHEME = "qt6ct";
     QT_QPA_PLATFORM = "wayland";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
   };
 
 }
