@@ -1,4 +1,3 @@
-                                                                                                                                                                                                                                                                                     /home/dairozero/HyprixZero/home-manager/home.nix                                                                                                                                                                                                                                                                                                  
 { config, pkgs, inputs, ... }: {
   imports = [];
 
@@ -75,20 +74,24 @@
     # === Terminal / CLI ===
     fastfetch
     foot
+    kitty
     neovim
     tmux
     yazi
     unzip
     yt-dlp
     eza
+    btop
 
     # === Qt6 / Theming & File Management ===
-    kdePackages.qt6ct
+    kdePackages.qt6ct                
     kdePackages.plasma-integration   
     kdePackages.qtwayland 
     qt6Packages.qt6ct
     libsForQt5.qt5.qtwayland
     hyprland-qt-support
+    gnome-themes-extra
+    nwg-look
 
     # === Wayland / Hyprland Utilities ===
     swww
@@ -118,6 +121,7 @@
     blender
     ffmpeg
     vlc
+    kdePackages.kdenlive
 
     # === Browsing / Chat ===
     brave

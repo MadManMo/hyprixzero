@@ -54,22 +54,17 @@
 
   networking.networkmanager.enable = true;
 
-  networking.firewall = {
-    enable = true;
-    allowedUDPPorts = [ 49983 ];
-  };
-
   services.xserver.enable = false;
+
+  services.xserver.videoDrivers = ["nvidia"];
 
   hardware.graphics = {
     enable = true;
-    enable32Bit = true;
   };
 
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
-    powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
@@ -79,7 +74,6 @@
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
-      kdePackages.xdg-desktop-portal-kde 
       xdg-desktop-portal-hyprland
     ];
     config.common.default = "*";
@@ -93,9 +87,6 @@
     jack.enable = true;  # optional
   };
 
-  services.gvfs.enable = true;
-  services.udisks2.enable = true;
-
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
@@ -105,7 +96,6 @@
     QT_QPA_PLATFORM = "wayland";
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    __GL_GSYNC_ALLOWED = "1";
   };
 
   programs = {
@@ -124,105 +114,18 @@
     };
   };
 
-   programs.nix-ld.enable = true;
-
-   programs.nix-ld.libraries = with pkgs; [
-   stdenv.cc.cc.lib
-   nss
-   nspr
-   glib
-   gtk3
-   gtk2
-   pango
-   cairo
-   atk
-   gdk-pixbuf
-   fontconfig
-   freetype
-   harfbuzz
-   mesa
-   libGL
-   libdrm
-   libgbm
-   libxshmfence
-   libxcb
-   libx11
-   libxcomposite
-   libxdamage
-   libxext
-   libxfixes
-   libxrandr
-   libxkbcommon
-   libxscrnsaver
-   libxcb-util
-   libxcb-render-util
-   libxcb-image
-   libxcb-keysyms
-   expat
-   dbus
-   at-spi2-atk
-   cups
-   udev
-   alsa-lib
-   ];
-
-  environment.systemPackages = with pkgs; [
-    git
-    vim
-    wget
-
-    # Dolphin core
-    kdePackages.dolphin
-
-    # Core KDE runtime
-    kdePackages.kio
-    kdePackages.kio-fuse
-    kdePackages.kio-extras
-    kdePackages.kdegraphics-thumbnailers
-    kdePackages.qtsvg
-    kdePackages.breeze-icons
-    kdePackages.kservice
-
-    # File associations on Hyprland
-    kdePackages.plasma-workspace
-    kdePackages.dolphin-plugins
-    kdePackages.ark
-
-    # General system utils
-    shared-mime-info
-
-    # Better search in Dolphin
-     kdePackages.baloo
-     kdePackages.baloo-widgets
-
+  fonts.packages = with pkgs; [
+    pkgs.nerd-fonts.fira-code
+    pkgs.nerd-fonts.jetbrains-mono
+    pkgs.nerd-fonts.symbols-only
+    pkgs.nerd-fonts.iosevka-term
+    pkgs.nerd-fonts.iosevka-term-slab
   ];
 
-  environment.etc."xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
-  xdg.mime.enable = true;
-  xdg.menus.enable = true;
-
-  fonts = {
-    enableDefaultPackages = true;
-
-    packages = with pkgs; [
-      nerd-fonts.fira-code
-      nerd-fonts.jetbrains-mono      # Your main choice
-      nerd-fonts.symbols-only
-      nerd-fonts.iosevka-term
-      nerd-fonts.iosevka-term-slab
-    ];
-
-    fontconfig = {
-      enable = true;
-      antialias = true;
-      hinting.enable = true;
-      # hinting.style = "slight";   # or "medium" / "full"
-      # subpixel.rgba = "rgb";
-
-      defaultFonts = {
-        monospace = [ "JetBrainsMono Nerd Font" ];   # This is the exact family name
-      };
-    };
+  fonts.fontconfig = {
+    enable = true;
+    antialias = true;
+    hinting.enable = true;
   };
 
   services.flatpak.enable = true;
