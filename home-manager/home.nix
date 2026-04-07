@@ -1,5 +1,8 @@
 { config, pkgs, inputs, ... }: {
-  imports = [];
+  imports = [
+    inputs.noctalia.homeModules.default
+    ./noctalia.nix
+  ];
 
   home.username = "dairozero";
   home.homeDirectory = "/home/dairozero";
@@ -51,12 +54,6 @@
       enable = true;
     };
   };
-
-  # === Noctalia Shell ===
-  imports = [
-    inputs.noctalia.homeModules.default
-    ./noctalia.nix
-  ];
 
   # === OBS Studio ===
   programs.obs-studio = {
