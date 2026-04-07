@@ -8,6 +8,13 @@
   # Important for UWSM
   wayland.windowManager.hyprland.systemd.enable = false;
 
+  # Qt theming
+  home.sessionVariables = {
+    QT_QPA_PLATFORMTHEME = "qt6ct";
+    QT_QPA_PLATFORM = "wayland";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+  };
+
   # === Shell ===
   programs.fish = {
     enable = true;
@@ -119,6 +126,7 @@
     audacity
     reaper
     blender
+    unityhub
     ffmpeg
     vlc
     kdePackages.kdenlive
@@ -137,12 +145,5 @@
     # imv
     rmpc
   ];
-
-  # Qt theming
-  home.sessionVariables = {
-    QT_QPA_PLATFORMTHEME = "qt6ct";
-    QT_QPA_PLATFORM = "wayland";
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-  };
 
 }
