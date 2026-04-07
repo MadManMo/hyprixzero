@@ -59,7 +59,22 @@
     allowedUDPPorts = [ 49983 ];
   };
 
+  security.rtkit.enable = true;
+
   services.xserver.enable = false;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+  services.flatpak.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;  # optional
+  };
+
+  hardware.pulseaudio.enable = false;
 
   hardware.graphics = {
     enable = true;
@@ -84,20 +99,6 @@
     ];
     config.common.default = "*";
   };
-
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;  # optional
-  };
-
-  services.gvfs.enable = true;
-  services.udisks2.enable = true;
-
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
@@ -224,8 +225,6 @@
       };
     };
   };
-
-  services.flatpak.enable = true;
 
   system.stateVersion = "25.11";
 }
