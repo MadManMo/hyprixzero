@@ -4,8 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -15,12 +15,11 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, quickshell, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, noctalia, ... } @ inputs:
     let
       system = "x86_64-linux";
       hostname = "hyprixzero";
       username = "dairozero";
-      # Import nixpkgs with unfree packages allowed
       pkgs = import nixpkgs {
         inherit system;
         config = {
@@ -28,7 +27,7 @@
         };
       };
     in {
-      nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {  # Use nixpkgs.lib directly here
+      nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
 
         specialArgs = {
