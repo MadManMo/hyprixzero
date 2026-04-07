@@ -45,11 +45,11 @@
     };
   };
 
-  # === Quickshell ===
-  programs.quickshell = {
-    enable = true;
-    package = inputs.quickshell.packages.${pkgs.system}.default;
-  };
+  # === Noctalia Shell ===
+  imports = [
+    inputs.noctalia.homeModules.default
+    ./noctalia.nix
+  ];
 
   # === OBS Studio ===
   programs.obs-studio = {
