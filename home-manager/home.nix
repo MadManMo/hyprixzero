@@ -38,7 +38,7 @@
       ls = "eza -la --icons";
       vim = "nvim";
       update = "sudo nixos-rebuild switch --flake .#hyprixzero";
-      upgrade = ""nix flake update && sudo nixos-rebuild switch --flake .#hyprixzero"";
+      upgrade = "nix flake update && sudo nixos-rebuild switch --flake .#hyprixzero";
     };
   };
 
