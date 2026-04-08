@@ -45,6 +45,7 @@
       experimental-features = "nix-command flakes";
       flake-registry = "";
       nix-path = config.nix.nixPath;
+      allowed-users = [ "root" "@wheel" ]; #temp fix for the privilege escalation issue
     };
     gc = {
       automatic = true;
@@ -62,6 +63,7 @@
 
   # ── Hardware & Graphics ──────────────────────
   services.xserver.enable = false;
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.graphics = {
     enable = true;
