@@ -1,3 +1,4 @@
+
 {
   description = "HyprixZero";
 
@@ -11,6 +12,11 @@
 
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    airi = {
+      url = "path:/home/dairozero/airi";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
