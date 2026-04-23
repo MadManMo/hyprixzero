@@ -1,3 +1,4 @@
+                                                                                                                                                                                                                                                                                   /home/dairozero/HyprixZero/nixos/configuration.nix                                                                                                                                                                                                                                                                                                 
 { config, pkgs, lib, inputs, ... }: {
   imports = [
     ./hardware-configuration.nix
@@ -76,10 +77,11 @@
     powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    #package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
   };
 
-  # ── Audio & Services ─────────────────────────
+  # ── Services ─────────────────────────────────
   security.rtkit.enable = true;
 
   services.pipewire = {
@@ -95,6 +97,11 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
   services.flatpak.enable = true;
+
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-cuda;
+  };
 
   # ── Portal & Environment ─────────────────────
   xdg.portal = {
@@ -114,6 +121,11 @@
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     __GL_GSYNC_ALLOWED = "1";
+    SDL_AUDIODRIVER = "pipewire";
+    LIBVA_DRIVER_NAME = "nvidia";
+    MOZ_DISABLE_RDD_SANDBOX = "1";
+    NVIDIA_VISIBLE_DEVICES = "0";
+    PULSE_SERVER = "";
   };
 
   # ── Programs ─────────────────────────────────
@@ -138,6 +150,7 @@
       libxcb libx11 libxcomposite libxdamage libxext libxfixes libxrandr
       libxkbcommon libxscrnsaver libxcb-util libxcb-render-util libxcb-image
       libxcb-keysyms expat dbus at-spi2-atk cups udev alsa-lib
+      libXtst
     ];
   };
 
