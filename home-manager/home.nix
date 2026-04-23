@@ -1,3 +1,4 @@
+
 { config, pkgs, inputs, ... }: {
   imports = [
     inputs.noctalia.homeModules.default
@@ -58,6 +59,7 @@
   # === OBS Studio ===
   programs.obs-studio = {
     enable = true;
+    package = pkgs.obs-studio.override { cudaSupport = true; };
     plugins = with pkgs.obs-studio-plugins; [
       wlrobs
       obs-pipewire-audio-capture
@@ -88,7 +90,7 @@
     btop
 
     # === Qt6 / Theming & File Management ===
-    kdePackages.qt6ct                
+    kdePackages.qt6ct
     kdePackages.plasma-integration   
     kdePackages.qtwayland 
     qt6Packages.qt6ct
@@ -138,9 +140,25 @@
     lutris
     protonup-qt
 
+    # === AIRI ===
+    inputs.airi.packages.${pkgs.system}.default
+      (pkgs.writeShellScriptBin "airi-launch" ''
+        export LD_LIBRARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH"
+        exec /home/dairozero/airi/result/bin/airi
+      '')
+
     # Optional
     # imv
     rmpc
   ];
+
+  # === AIRI Desktop Entry ===
+  xdg.desktopEntries.airi = {
+    name = "AIRI";
+    exec = "airi-launch";
+    icon = "airi";
+    categories = [ "AudioVideo" "Amusement" ];
+    comment = "Self-hostable AI companion";
+  };
 
 }
